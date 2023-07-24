@@ -54,19 +54,19 @@ from sendpost_py.model.to import To
 with sendpost_py.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = email_api.EmailApi(api_client)
-    x_sub_account_api_key = "oYK44gOzbyUHFsUnczMR" # str | Sub-Account API Key
+    x_sub_account_api_key = "your_api_key" # str | Sub-Account API Key
     email = {
       "from": {
-            "email": "arseniy@ring4.com",
+            "email": "richard@piedpiper.com",
       },
       "to": [
         {
-          "email": "arseniy@sendx.io",
+          "email": "gavin@hooli.com",
         }
       ],
       "subject": "Hello World",
       "htmlBody": "<strong>it works!</strong>",
-      "ippool": "Mailgun",
+      "ippool": "PiedPiper",
     }
     try:
         api_response = api_instance.send_email(header_params={ 'X-SubAccount-ApiKey': x_sub_account_api_key}, body=email)
