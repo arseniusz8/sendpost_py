@@ -837,6 +837,8 @@ class OpenApiResponse(JSONDetector):
         self.headers = headers
         if content is not None and len(content) == 0:
             raise ValueError('Invalid value for content, the content dict must have >= 1 entry')
+        if content is not None and 'application/json' in content:
+            content['application/json; charset=utf-8'] = content['application/json']
         self.content = content
         self.response_cls = response_cls
 

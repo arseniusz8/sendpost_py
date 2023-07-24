@@ -47,63 +47,29 @@ from pprint import pprint
 from sendpost_py.apis.tags import email_api
 from sendpost_py.model.email_message import EmailMessage
 from sendpost_py.model.email_response import EmailResponse
-# Defining the host is optional and defaults to https://api.sendpost.io/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = sendpost_py.Configuration(
-    host = "https://api.sendpost.io/api/v1"
-)
-
+from sendpost_py.model.model_from import ModelFrom
+from sendpost_py.model.to import To
 
 # Enter a context with an instance of the API client
-with sendpost_py.ApiClient(configuration) as api_client:
+with sendpost_py.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = email_api.EmailApi(api_client)
-    x_sub_account_api_key = "X-SubAccount-ApiKey_example" # str | Sub-Account API Key
-email_message = EmailMessage(
-        attachments=[
-            Attachment(
-                content="V2VsY29tZSB0byBTZW5kUG9zdCEgOikK",
-                filename="file0.txt",
-            )
-        ],
-        _from=ModelFrom(
-            email="gavin@hooli.com",
-            name="Gavin Belson",
-        ),
-        groups=["promotion","techcrunch-launch"],
-        html_body="<html><body>Thanks for your trust in Hooli {{.Name}}. We are trying launching Nucleus at TechCrunch Disrupt - our cloud based compression platform. That you could easily integrate it into {{.Company}}.</html></body>",
-        ippool="promotional-hooli",
-        pre_text="Follow the steps to integrate our video compression API",
-        reply_to=ReplyTo(
-            email="welcome@hooli.vom",
-            name="Team @ Hooli",
-        ),
-        subject="Welcome to Nucles {{.Name}}:) Let's get started",
-        template="welcome-onboarding",
-        text_body="Thanks for your trust in Hooli {{.Name}}. We are trying launching Nucleus at TechCrunch Disrupt - our cloud based compression platform. That you could easily integrate it into {{.Company}}",
-        to=[
-            To(
-                name="Elrich Bachman",
-                email="elrich@bachmanity.com",
-                cc=[
-                    CopyTo(
-                        name="Nelson Bighetti",
-                        email="bighead@bachmanity.com",
-                        custom_fields=dict(),
-                    )
-                ],
-,
-                custom_fields=dict(),
-            )
-        ],
-        track_clicks=True,
-        track_opens=True,
-        headers=dict(),
-        amp_body="amp_body_example",
-    ) # EmailMessage | Email message (optional)
-
+    x_sub_account_api_key = "oYK44gOzbyUHFsUnczMR" # str | Sub-Account API Key
+    email = {
+      "from": {
+            "email": "arseniy@ring4.com",
+      },
+      "to": [
+        {
+          "email": "arseniy@sendx.io",
+        }
+      ],
+      "subject": "Hello World",
+      "htmlBody": "<strong>it works!</strong>",
+      "ippool": "Mailgun",
+    }
     try:
-        api_response = api_instance.send_email(x_sub_account_api_keyemail_message=email_message)
+        api_response = api_instance.send_email(header_params={ 'X-SubAccount-ApiKey': x_sub_account_api_key}, body=email)
         pprint(api_response)
     except sendpost_py.ApiException as e:
         print("Exception when calling EmailApi->send_email: %s\n" % e)
