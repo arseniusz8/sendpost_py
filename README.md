@@ -41,14 +41,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import time
 import sendpost_py
 from pprint import pprint
 from sendpost_py.apis.tags import email_api
-from sendpost_py.model.email_message import EmailMessage
-from sendpost_py.model.email_response import EmailResponse
-from sendpost_py.model.model_from import ModelFrom
-from sendpost_py.model.to import To
 
 # Enter a context with an instance of the API client
 with sendpost_py.ApiClient() as api_client:
